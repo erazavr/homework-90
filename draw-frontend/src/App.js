@@ -68,6 +68,7 @@ class App extends Component {
 
         const x = e.clientX - rect.left - 5;
         const y = e.clientY - rect.top - 5;
+
         ctx.beginPath();
         ctx.arc(x, y, 10, 0, 2 * Math.PI);
         ctx.fillStyle = this.state.color;
