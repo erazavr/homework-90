@@ -18,15 +18,21 @@ let color;
 
 app.ws('/draw', function (ws, req) {
    console.log('Client connected!');
+
    const id = nanoid();
+
    connections[id] = ws;
+
    console.log('Total clients connections ', Object.keys(connections).length);
+
    ws.send(JSON.stringify({
       type: 'LAST_PICTURES',
       pictures: pictures
    }));
+
    ws.on('message', (msg) => {
       console.log(`Incoming message from ${id} , ${msg}`);
+
       const parsed = JSON.parse(msg);
       switch (parsed.type) {
          case 'CREATE_PICTURE':
@@ -46,7 +52,6 @@ app.ws('/draw', function (ws, req) {
          default:
             console.log('No type' + parsed.type)
       }
-
    });
 
    ws.on('close', (msg) => {
